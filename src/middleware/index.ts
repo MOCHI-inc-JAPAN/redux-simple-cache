@@ -102,14 +102,16 @@ function warnIfRemoveError(err: Error) {
   }
 }
 
-function purgeCacheAll<S>(config: SimpleCacheMiddlewareConfig<S>) {
+async function purgeCacheAll<S>(config: SimpleCacheMiddlewareConfig<S>) {
+  let queue = []
   for(let [cacheKey, cacheSetting] of Object.entries(config.cache)) {
     const storage = config.storage[cacheSetting.storageId]
-    return storage.removeItem(cacheKey, warnIfRemoveError)
+    queue.push(storage.removeItem(cacheKey, warnIfRemoveError))
   }
+  return Promise.all(queue)
 }
 
-function purgeCache<S>(config: SimpleCacheMiddlewareConfig<S>,cacheKey: string) {
+async function purgeCache<S>(config: SimpleCacheMiddlewareConfig<S>,cacheKey: string) {
   if(cacheKey in config.cache) {
     const storage = config.storage[config.cache[cacheKey].storageId]
     return storage.removeItem(cacheKey, warnIfRemoveError)
