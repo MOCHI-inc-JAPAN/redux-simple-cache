@@ -1,5 +1,4 @@
 import type { Storage } from '../types'
-
 function noop() {}
 let noopStorage = {
   getItem: noop,

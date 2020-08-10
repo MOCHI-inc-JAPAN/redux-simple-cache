@@ -1,7 +1,4 @@
-// @flow
-
-export const KEY_PREFIX = 'simple-cache:'
-export const REHYDRATE = '@@simple-cache/REHYDRATE'
-export const PERSIST = '@@simple-cache/PERSIST'
-export const PURGE = '@@simple-cache/PURGE'
-export const DEFAULT_VERSION = -1
+import { SimpleCacheBuiltinType } from "./types";
+export const ENABLE: SimpleCacheBuiltinType = '@@SIMPLE_CACHE:ENABLE'
+export const DISABLE: SimpleCacheBuiltinType = '@@SIMPLE_CACHE:DISABLE'
+export const PURGE: SimpleCacheBuiltinType = '@@SIMPLE_CACHE:PURGE'
